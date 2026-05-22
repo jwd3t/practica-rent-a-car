@@ -5,5 +5,5 @@ export const environment = {
   rentalsEndpointPath: '/rentals',
   incidentsEndpointPath: '/incidents',
   logoApiBaseUrl: 'https://img.logo.dev/',
-  logoTokenL: '?token=pk_NVVbyuM_RkCABhzvFnmxMQ',
+  logoToken: '?token=pk_NVVbyuM_RkCABhzvFnmxMQ',
 };

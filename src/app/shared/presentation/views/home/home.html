@@ -1,9 +1,9 @@
 <section class="home-page" aria-labelledby="home-title">
   <div class="hero">
-    <p class="eyebrow">Home</p>
-    <h2 id="home-title">Welcome to Enterprise Rent-A-Car</h2>
+    <p class="eyebrow">Template Home</p>
+    <h2 id="home-title">Welcome to the Case Study Template</h2>
     <p class="lede">
-      Monitor fleet utilization, rental activity and the next operational incident in one place.
+      Replace this hero section with the title, description and overview required by the current exam case.
     </p>
   </div>
 
@@ -17,8 +17,8 @@
 
   <section class="section-block" aria-labelledby="analytics-title">
     <div class="section-heading">
-      <h3 id="analytics-title">Fleet Utilization Analytics</h3>
-      <a routerLink="/operations/rentals/new">Create Rental</a>
+      <h3 id="analytics-title">Primary Analytics Section</h3>
+      <a routerLink="/operations/rentals/new">Open Primary Form</a>
     </div>
 
     <div class="stats-grid">
@@ -30,15 +30,17 @@
           <mat-card-content>
             <div class="metric">
               <span class="metric-label">Daily Revenue Potential</span>
+              <span class="metric-label helper">Replace this label with your first computed KPI</span>
               <strong>{{ stat.dailyRevenuePotential | currency }}</strong>
             </div>
             <div class="metric">
               <span class="metric-label">Estimated Incident Cost</span>
+              <span class="metric-label helper">Replace this label with your second computed KPI</span>
               <strong>{{ stat.estimatedIncidentCost | currency }}</strong>
             </div>
           </mat-card-content>
           <mat-card-actions>
-            <span>Vehicles Rented: {{ stat.vehiclesRented }}</span>
+            <span>Template Counter: {{ stat.vehiclesRented }}</span>
           </mat-card-actions>
         </mat-card>
       }
@@ -46,7 +48,7 @@
   </section>
 
   <section class="section-block" aria-labelledby="incident-title">
-    <h3 id="incident-title">Next Urgent Incident</h3>
+    <h3 id="incident-title">Secondary Highlight Section</h3>
 
     @if (nextUrgentIncident(); as incidentData) {
       <mat-card class="incident-card">
@@ -70,7 +72,7 @@
       </mat-card>
     } @else {
       <mat-card class="incident-card">
-        <mat-card-content>No normal-priority incidents are available right now.</mat-card-content>
+        <mat-card-content>Replace this empty state with the one required by your case study.</mat-card-content>
       </mat-card>
     }
   </section>

@@ -1,54 +1,40 @@
+# Angular Exam Template
 
-copiar todo shared
+This project is now organized as a reusable Angular exam template based on:
 
-copiar app.config.ts
-
-copiar app.ts
-
-app.html
-
-orden de creacion de bc
-entity->assembler->api-endpoint->BC-api->store->BCroutes->app.routes
-
-# Enterprise Fleet Manager
-
-Enterprise Fleet Manager is a web application built with Angular and Angular Material for managing fleet information in the Enterprise Rent-A-Car case study. The application provides fleet analytics, urgent incident tracking, and rental registration features using a fake backend powered by `json-server`.
-
-## Author
-
-- Author: `Your Full Name Here`
-
-## Description
-
-This project was developed as a frontend solution for a vehicle rental management scenario. It consumes data from a fake REST API and presents operational and analytical information about:
-
-- Vehicles
-- Rentals
-- Incidents
-
-The application follows a domain-driven and layered structure, organizing the code into bounded contexts such as `shared`, `masters`, and `operations`.
-
-## Main Features
-
-- Responsive user interface built with Angular Material
-- Toolbar with branding, navigation, and language switching
-- Home view with fleet utilization analytics
-- Next urgent incident summary
-- New rental registration form
-- Automatic incident creation for cleaning after rental creation
-- Route handling with page-not-found view
-- Internationalization with English and Spanish support
-- State management with Angular Signals
-
-## Technology Stack
-
-- Angular
-- TypeScript
+- standalone components
 - Angular Material
 - Angular Router
 - Angular Signals
 - `@ngx-translate/core`
 - `json-server`
+- a layered / bounded-context structure
+
+Use this repository as a base and adapt the business names, endpoints, views and calculations for each exam case.
+
+## Quick Reuse Strategy
+
+When you start a new exam project, reuse this template in this order:
+
+1. Copy `shared`
+2. Copy `app.config.ts`, `app.ts`, `app.html`
+3. Copy `environments`
+4. Create or rename your bounded contexts
+5. Build each bounded context in this order:
+
+```text
+entity -> response -> assembler -> api-endpoint -> api -> store -> routes -> views
+```
+
+## Recommended Bounded Context Strategy
+
+Keep the project simple during the exam:
+
+- `shared`: common UI and base infrastructure
+- `masters`: master data, catalogs, reference entities
+- `operations`: transactions, forms, actions, process data
+
+If the case study changes, you can rename `masters` and `operations`, but keep the same layered structure.
 
 ## Project Structure
 
@@ -56,69 +42,145 @@ The application follows a domain-driven and layered structure, organizing the co
 src/
   app/
     shared/
+      infrastructure/
+      presentation/
     masters/
+      domain/
+      application/
+      infrastructure/
+      presentation/
     operations/
+      domain/
+      application/
+      infrastructure/
+      presentation/
   environments/
 server/
   db.json
 ```
 
-## Fake Backend
+## What To Replace In A New Exam
 
-This project uses `json-server` as a fake backend.
+### 1. Environment
 
-Place the provided database file inside the `server` folder as:
+Update:
 
-```text
-server/db.json
+- `apiBaseUrl`
+- endpoint paths
+- branding / logo values if needed
+
+File:
+
+- `src/environments/environment.ts`
+
+### 2. Entities
+
+For each collection in the fake backend:
+
+- create one entity class
+- copy the fields from the JSON object
+- keep naming in English
+- keep file naming as `x.entity.ts`
+
+### 3. Responses
+
+For each collection:
+
+- create `XResource`
+- create `XsResponse`
+
+Pattern:
+
+```ts
+export interface XsResponse extends BaseResponse {
+  xs: XResource[];
+}
+
+export interface XResource extends BaseResource {
+  id: number;
+}
 ```
+
+### 4. Assemblers
+
+Every assembler repeats the same three methods:
+
+- `toEntityFromResource`
+- `toResourceFromEntity`
+- `toEntitiesFromResponse`
+
+### 5. API Endpoints
+
+Every endpoint repeats the same pattern:
+
+- extend `BaseApiEndpoint`
+- inject `HttpClient`
+- compose the URL from `environment`
+- instantiate the related assembler
+
+### 6. APIs
+
+Each bounded context can expose one thin API class that wraps its endpoints.
+
+Examples:
+
+- `MastersApi`
+- `OperationsApi`
+
+### 7. Stores
+
+Each store should usually contain:
+
+- one or more signals with data
+- `loading`
+- `error`
+- public actions like `add`, `update`, `delete`
+- a private `load...()` called from the constructor
+
+### 8. Routes
+
+Keep routing simple:
+
+- `app.routes.ts` for root navigation
+- one `*.routes.ts` file per bounded context when needed
+
+## Minimal Exam Checklist
+
+Before adding polish, make sure you have:
+
+- app builds successfully
+- root redirect works
+- page-not-found works
+- toolbar and navigation render
+- fake backend is running
+- Home view renders data
+- main form view submits data
+
+## Fake Backend
 
 Run the backend with:
 
 ```bash
-cd server
-json-server --watch db.json
+npx json-server --watch server/db.json --port 3000
 ```
 
-The fake API will be available at:
+## Frontend
 
-```text
-http://localhost:3000
-```
-
-## Development Server
-
-To start the Angular application, run:
+Run Angular with:
 
 ```bash
-ng serve
+npm start
 ```
 
 Then open:
 
 ```text
-http://localhost:4200
+http://localhost:4200/home
 ```
 
-## Build
+## Notes For Future You
 
-To generate a production build:
-
-```bash
-ng build
-```
-
-## Running Tests
-
-To run unit tests:
-
-```bash
-ng test
-```
-
-## Notes
-
-- The default language is English.
-- The project uses standalone components.
-- URLs and endpoint paths should be configured through environment files to avoid hard-coded values.
-- Before packaging the project for submission, remove the `node_modules` folder.
+- Do not redesign everything in the exam.
+- Copy the pattern and rename carefully.
+- Keep entities, responses, assemblers and endpoints mechanical.
+- Spend your energy on routes, views, form logic and calculations.

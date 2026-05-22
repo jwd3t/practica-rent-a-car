@@ -24,6 +24,9 @@ export class Home {
     () => this.mastersStore.error() || this.operationsStore.error(),
   );
 
+  // Template note:
+  // Replace this computed block with the main analytics or summary cards
+  // required by your exam case. Reuse masters data + operations data here.
   readonly fleetStats = computed(() => {
     const vehicles = this.mastersStore.vehicles();
     const incidents = this.operationsStore.incidents();
@@ -53,6 +56,9 @@ export class Home {
     });
   });
 
+  // Template note:
+  // Replace this block with the single "highlight" record that your case
+  // needs to feature on the home view.
   readonly nextUrgentIncident = computed(() => {
     const incident = [...this.operationsStore.incidents()]
       .filter((item) => item.priority === 'NORMAL')

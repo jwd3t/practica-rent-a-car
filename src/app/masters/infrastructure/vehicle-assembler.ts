@@ -2,7 +2,11 @@ import { BaseAssembler } from '../../shared/infrastructure/base-assembler';
 import { Vehicle } from '../domain/model/vehicle.entity';
 import { VehicleResource, VehiclesResponse } from './vehicle-response';
 
-
+// Template note:
+// Every assembler repeats the same three transformations:
+// resource -> entity
+// entity -> resource
+// response -> entity[]
 export class VehicleAssembler implements BaseAssembler<Vehicle, VehicleResource, VehiclesResponse> {
   toEntityFromResource(resource: VehicleResource): Vehicle {
     return new Vehicle({
@@ -25,10 +29,10 @@ export class VehicleAssembler implements BaseAssembler<Vehicle, VehicleResource,
       dailyRate: entity.dailyRate,
       vehicleType: entity.vehicleType,
       status: entity.status,
-    } as VehicleResource
+    };
   }
 
   toEntitiesFromResponse(response: VehiclesResponse): Vehicle[] {
-    return response.vehicles.map(resource=>this.toEntityFromResource(resource as VehicleResource))
+    return response.vehicles.map((resource) => this.toEntityFromResource(resource));
   }
 }

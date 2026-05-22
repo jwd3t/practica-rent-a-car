@@ -38,12 +38,18 @@ export class NewRental {
 
   readonly localError = signal<string | null>(null);
 
+  // Template note:
+  // Replace the form fields below with the minimum input fields required by
+  // the current case study. Keep the same reactive forms pattern.
   readonly form = this.fb.nonNullable.group({
     vehicleId: [0, [Validators.required, Validators.min(1)]],
     clientId: [0, [Validators.required, Validators.min(1)]],
     durationDays: [1, [Validators.required, Validators.min(1)]],
   });
 
+  // Template note:
+  // This computed property currently filters "selectable vehicles".
+  // Replace it with the selection rule required by your own master data.
   readonly selectableVehicles = computed(() =>
     this.mastersStore.vehicles().filter((vehicle) => vehicle.status !== 'MAINTENANCE'),
   );
@@ -60,6 +66,10 @@ export class NewRental {
       return;
     }
 
+    // Template note:
+    // Everything below is case-specific business logic.
+    // Replace validation rules, derived fields, related record creation and
+    // redirect behavior based on the exam requirements.
     const { vehicleId, clientId, durationDays } = this.form.getRawValue();
     const vehicle = this.mastersStore.vehicles().find((item) => item.id === vehicleId);
 

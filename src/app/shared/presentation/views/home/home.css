@@ -62,6 +62,11 @@
   font-size: 0.95rem;
 }
 
+.metric-label.helper {
+  font-size: 0.8rem;
+  color: #7f8c97;
+}
+
 .status-message {
   padding: 0.85rem 1rem;
   border-radius: 0.75rem;

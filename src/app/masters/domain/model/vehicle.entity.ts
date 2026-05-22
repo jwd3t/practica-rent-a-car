@@ -1,5 +1,8 @@
 import { BaseEntity } from '../../../shared/infrastructure/base-entity';
 
+// Template note:
+// This entity is the direct "internal app model" version of one object from the backend.
+// To adapt it to a new case, copy the JSON fields from db.json and rename the class / file.
 export class Vehicle implements BaseEntity {
   private _id: number;
   private _make: string;

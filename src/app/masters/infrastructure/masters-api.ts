@@ -8,6 +8,9 @@ import { Vehicle } from '../domain/model/vehicle.entity';
 @Injectable({
   providedIn: 'root',
 })
+// Template note:
+// Api classes are thin wrappers around one or more endpoint classes.
+// They are safe to copy and rename quickly in an exam.
 export class MastersApi extends BaseApi {
   private readonly vehicleEndpoint: VehiclesApiEndpoint;
 

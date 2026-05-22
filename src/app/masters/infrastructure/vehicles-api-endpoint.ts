@@ -5,6 +5,10 @@ import { VehicleAssembler } from './vehicle-assembler';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 
+// Template note:
+// This class is usually mechanical:
+// BaseApiEndpoint<Entity, Resource, Response, Assembler>
+// super(http, fullUrlFromEnvironment, new Assembler())
 export class VehiclesApiEndpoint extends BaseApiEndpoint<Vehicle, VehicleResource, VehiclesResponse, VehicleAssembler>{
   constructor(http:HttpClient) {
     super(http,`${environment.apiBaseUrl}${environment.vehiclesEndpointPath}`,

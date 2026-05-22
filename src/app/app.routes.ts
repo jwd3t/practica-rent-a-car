@@ -1,6 +1,9 @@
 import { Routes } from '@angular/router';
 import { Home } from './shared/presentation/views/home/home';
 
+// Template note:
+// Keep root routes here only.
+// Each bounded context can expose its own child routes file.
 const pageNotFound = () =>
   import('./shared/presentation/views/page-not-found/page-not-found').then(
     (m) => m.PageNotFound,

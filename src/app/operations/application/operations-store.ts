@@ -107,6 +107,10 @@ export class OperationsStore {
       });
   }
 
+  // Template note:
+  // This method is intentionally case-specific.
+  // Replace it with the composed action needed by your exam:
+  // for example "create order + create tracking record", etc.
   createRentalContract(rental: Rental, incident: Incident): void {
     this.loadingSignal.set(true);
     this.errorSignal.set(null);

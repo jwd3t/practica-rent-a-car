@@ -1,8 +1,8 @@
 <section class="new-rental-page" aria-labelledby="new-rental-title">
   <mat-card>
     <mat-card-header>
-      <mat-card-title id="new-rental-title">New Rental</mat-card-title>
-      <mat-card-subtitle>Create a New Rental Contract</mat-card-subtitle>
+      <mat-card-title id="new-rental-title">Primary Form Template</mat-card-title>
+      <mat-card-subtitle>Replace this title and subtitle with the form requested by the current case.</mat-card-subtitle>
     </mat-card-header>
 
     <mat-card-content>
@@ -16,7 +16,7 @@
 
       <form class="rental-form" [formGroup]="form" (ngSubmit)="submit()">
         <mat-form-field appearance="outline">
-          <mat-label>Vehicle</mat-label>
+          <mat-label>Primary Selection</mat-label>
           <mat-select formControlName="vehicleId" aria-label="Vehicle selection">
             @for (vehicle of selectableVehicles(); track vehicle.id) {
               <mat-option [value]="vehicle.id">
@@ -27,18 +27,18 @@
         </mat-form-field>
 
         <mat-form-field appearance="outline">
-          <mat-label>Client ID</mat-label>
+          <mat-label>Reference ID</mat-label>
           <input matInput type="number" formControlName="clientId" aria-label="Client ID" />
         </mat-form-field>
 
         <mat-form-field appearance="outline">
-          <mat-label>Duration (days)</mat-label>
+          <mat-label>Quantity / Duration</mat-label>
           <input matInput type="number" formControlName="durationDays" aria-label="Duration in days" />
         </mat-form-field>
 
         <div class="actions">
           <button mat-flat-button color="primary" type="submit" [disabled]="form.invalid">
-            Create
+            Submit
           </button>
           <button mat-stroked-button type="button" (click)="cancel()">Cancel</button>
         </div>

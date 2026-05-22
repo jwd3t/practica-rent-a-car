@@ -6,6 +6,13 @@ import { retry } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
+// Template note:
+// A store keeps the UI state:
+// - data signals
+// - loading
+// - error
+// - CRUD actions
+// Copy this pattern and replace names one bounded context at a time.
 export class MastersStore {
   private readonly vehiclesSignal = signal<Vehicle[]>([]);
   readonly vehicles = this.vehiclesSignal.asReadonly();

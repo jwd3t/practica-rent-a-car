@@ -1,12 +1,20 @@
-import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component, inject, signal } from '@angular/core';
 
+import { Layout } from './shared/presentation/components/layout/layout';
+import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [Layout],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
 export class App {
   protected readonly title = signal('rent-a-car');
+  private translate: TranslateService;
+
+  constructor() {
+    this.translate = inject(TranslateService);
+    this.translate.addLangs(['en','es']);
+    this.translate.use('en');
+  }
 }

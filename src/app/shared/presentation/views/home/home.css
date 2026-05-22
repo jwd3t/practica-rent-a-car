@@ -1,0 +1,74 @@
+.home-page {
+  padding: 2rem 1rem 3rem;
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+.hero {
+  margin-bottom: 2rem;
+}
+
+.eyebrow {
+  color: #0f7a32;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin: 0 0 0.5rem;
+}
+
+.lede {
+  max-width: 720px;
+  color: #405261;
+}
+
+.section-block {
+  margin-top: 2rem;
+}
+
+.section-heading {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.section-heading a {
+  color: #0f7a32;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.stats-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+.stat-card,
+.incident-card {
+  border-top: 5px solid #0f7a32;
+}
+
+.metric {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-bottom: 1rem;
+}
+
+.metric-label {
+  color: #5f6f7e;
+  font-size: 0.95rem;
+}
+
+.status-message {
+  padding: 0.85rem 1rem;
+  border-radius: 0.75rem;
+  background: #eef6f0;
+}
+
+.status-message.error {
+  background: #fdeceb;
+  color: #b42318;
+}

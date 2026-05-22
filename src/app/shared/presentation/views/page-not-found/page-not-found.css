@@ -1,0 +1,22 @@
+.page-not-found {
+  min-height: calc(100vh - 160px);
+  display: grid;
+  place-items: center;
+  padding: 2rem 1rem;
+}
+
+.message-card {
+  max-width: 560px;
+  text-align: center;
+  padding: 2rem;
+  border-radius: 1rem;
+  background: #f7faf7;
+  border: 1px solid #d6e9d9;
+}
+
+.eyebrow {
+  color: #0f7a32;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}

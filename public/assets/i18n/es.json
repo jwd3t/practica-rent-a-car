@@ -1,0 +1,11 @@
+{
+  "option": {
+    "home": "Inicio",
+    "new-rental": "Nuevo alquiler"
+  },
+  "footer": {
+    "rights": "Todos los derechos reservados.",
+    "powered-by": "Desarrollado con",
+    "and": "y"
+  }
+}

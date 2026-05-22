@@ -6,7 +6,7 @@ export interface IncidentsResponse extends BaseResponse{
 export interface IncidentResource extends BaseResource {
   id: number;
   vehicleId: number;
-  rentalId: number;
+  rentalId: number | null;
   incidentType: string;
   registeredAt: string;
   estimatedRepairCost: number;

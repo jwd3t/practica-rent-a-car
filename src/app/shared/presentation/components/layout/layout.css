@@ -2,6 +2,24 @@
   flex: 1 1 auto;
 }
 
-.mat-toolbar{
-  background: aquamarine;
+.mat-toolbar {
+  background: linear-gradient(90deg, #0d5b25 0%, #14873a 100%);
+  color: #ffffff;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.mat-toolbar a {
+  color: #ffffff;
+}
+
+.brand-logo {
+  width: 42px;
+  height: 42px;
+  object-fit: contain;
+  border-radius: 0.5rem;
+  background: #ffffff;
+  padding: 0.2rem;
+  margin-right: 0.85rem;
 }

@@ -25,6 +25,6 @@ import { FooterContent } from '../footer-content/footer-content';
 export class Layout {
   options = [
     { link: '/home', label: 'option.home' },
-    { link: '/new-rental', label: 'option.new-rental' },
+    { link: '/operations/rentals/new', label: 'option.new-rental' },
   ];
 }

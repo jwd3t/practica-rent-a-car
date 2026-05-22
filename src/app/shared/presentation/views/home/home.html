@@ -1,1 +1,77 @@
-<p>home works!</p>
+<section class="home-page" aria-labelledby="home-title">
+  <div class="hero">
+    <p class="eyebrow">Home</p>
+    <h2 id="home-title">Welcome to Enterprise Rent-A-Car</h2>
+    <p class="lede">
+      Monitor fleet utilization, rental activity and the next operational incident in one place.
+    </p>
+  </div>
+
+  @if (loading()) {
+    <p class="status-message">Loading dashboard data...</p>
+  }
+
+  @if (error()) {
+    <p class="status-message error">{{ error() }}</p>
+  }
+
+  <section class="section-block" aria-labelledby="analytics-title">
+    <div class="section-heading">
+      <h3 id="analytics-title">Fleet Utilization Analytics</h3>
+      <a routerLink="/operations/rentals/new">Create Rental</a>
+    </div>
+
+    <div class="stats-grid">
+      @for (stat of fleetStats(); track stat.vehicleType) {
+        <mat-card class="stat-card">
+          <mat-card-header>
+            <mat-card-title>{{ stat.vehicleType }}</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <div class="metric">
+              <span class="metric-label">Daily Revenue Potential</span>
+              <strong>{{ stat.dailyRevenuePotential | currency }}</strong>
+            </div>
+            <div class="metric">
+              <span class="metric-label">Estimated Incident Cost</span>
+              <strong>{{ stat.estimatedIncidentCost | currency }}</strong>
+            </div>
+          </mat-card-content>
+          <mat-card-actions>
+            <span>Vehicles Rented: {{ stat.vehiclesRented }}</span>
+          </mat-card-actions>
+        </mat-card>
+      }
+    </div>
+  </section>
+
+  <section class="section-block" aria-labelledby="incident-title">
+    <h3 id="incident-title">Next Urgent Incident</h3>
+
+    @if (nextUrgentIncident(); as incidentData) {
+      <mat-card class="incident-card">
+        <mat-card-header>
+          <mat-card-title>{{ incidentData.incident.incidentType }}</mat-card-title>
+          <mat-card-subtitle>
+            {{ incidentData.vehicle?.make }} {{ incidentData.vehicle?.model }}
+          </mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <p><strong>Priority:</strong> {{ incidentData.incident.priority }}</p>
+          <p>
+            <strong>Registered At:</strong>
+            {{ incidentData.incident.registeredAt | date: 'medium' }}
+          </p>
+          <p>
+            <strong>Estimated Repair Cost:</strong>
+            {{ incidentData.incident.estimatedRepairCost | currency }}
+          </p>
+        </mat-card-content>
+      </mat-card>
+    } @else {
+      <mat-card class="incident-card">
+        <mat-card-content>No normal-priority incidents are available right now.</mat-card-content>
+      </mat-card>
+    }
+  </section>
+</section>

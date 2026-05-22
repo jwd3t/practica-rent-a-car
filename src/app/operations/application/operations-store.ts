@@ -107,6 +107,50 @@ export class OperationsStore {
       });
   }
 
+  createRentalContract(rental: Rental, incident: Incident): void {
+    this.loadingSignal.set(true);
+    this.errorSignal.set(null);
+
+    this.operationsApi
+      .createRental(rental)
+      .pipe(retry(2))
+      .subscribe({
+        next: (createdRental) => {
+          this.rentalsSignal.update((rentals) => [...rentals, createdRental]);
+
+          const incidentWithRental = new Incident({
+            id: incident.id,
+            vehicleId: incident.vehicleId,
+            rentalId: createdRental.id,
+            incidentType: incident.incidentType,
+            registeredAt: incident.registeredAt,
+            estimatedRepairCost: incident.estimatedRepairCost,
+            priority: incident.priority,
+          });
+
+          this.operationsApi
+            .createIncident(incidentWithRental)
+            .pipe(retry(2))
+            .subscribe({
+              next: (createdIncident) => {
+                this.incidentsSignal.update((incidents) => [...incidents, createdIncident]);
+                this.loadingSignal.set(false);
+              },
+              error: (err) => {
+                this.errorSignal.set(
+                  this.formatError(err, 'Failed to create cleaning incident'),
+                );
+                this.loadingSignal.set(false);
+              },
+            });
+        },
+        error: (err) => {
+          this.errorSignal.set(this.formatError(err, 'Failed to create rental'));
+          this.loadingSignal.set(false);
+        },
+      });
+  }
+
   updateIncident(updatedIncident: Incident): void {
     this.loadingSignal.set(true);
     this.errorSignal.set(null);

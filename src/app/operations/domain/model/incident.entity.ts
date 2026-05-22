@@ -3,7 +3,7 @@ import { BaseEntity } from '../../../shared/infrastructure/base-entity';
 export class Incident implements BaseEntity {
   private _id: number;
   private _vehicleId: number;
-  private _rentalId: number;
+  private _rentalId: number | null;
   private _incidentType: string;
   private _registeredAt: string;
   private _estimatedRepairCost: number;
@@ -12,7 +12,7 @@ export class Incident implements BaseEntity {
   constructor(incident: {
     id: number;
     vehicleId: number;
-    rentalId: number;
+    rentalId: number | null;
     incidentType: string;
     registeredAt: string;
     estimatedRepairCost: number;
@@ -55,11 +55,11 @@ export class Incident implements BaseEntity {
   set incidentType(value: string) {
     this._incidentType = value;
   }
-  get rentalId(): number {
+  get rentalId(): number | null {
     return this._rentalId;
   }
 
-  set rentalId(value: number) {
+  set rentalId(value: number | null) {
     this._rentalId = value;
   }
   get vehicleId(): number {

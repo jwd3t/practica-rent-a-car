@@ -1,3 +1,15 @@
+
+copiar todo shared
+
+copiar app.config.ts
+
+copiar app.ts
+
+app.html
+
+orden de creacion de bc
+entity->assembler->api-endpoint->BC-api->store->BCroutes->app.routes
+
 # Enterprise Fleet Manager
 
 Enterprise Fleet Manager is a web application built with Angular and Angular Material for managing fleet information in the Enterprise Rent-A-Car case study. The application provides fleet analytics, urgent incident tracking, and rental registration features using a fake backend powered by `json-server`.
